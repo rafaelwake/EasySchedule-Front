@@ -30,7 +30,7 @@ export class LoginComponent {
     const user = { email, password };
     this.userService.login(user).subscribe(
       (data) => {
-        console.log(data);
+        console.log('data to login', data);
         // Aqui você pode redirecionar o usuário para a página de dashboard ou fazer qualquer outra coisa que desejar
       },
       (error) => {

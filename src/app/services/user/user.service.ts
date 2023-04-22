@@ -14,6 +14,8 @@ export class UserService {
   }
 
   login(user: any) {
+    console.log('data to login', user);
+
     return this.http.post(`${this.baseUrl}/login`, user);
   }
 }

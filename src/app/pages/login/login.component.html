@@ -1,23 +1,23 @@
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src="../../../assets/img/1.png" class="img-fluid" alt="Calendar image">
-      </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+      <div class="col-md-7 col-lg-5 col-xl-12 offset-xl-1">
+
         <form>
           <div class="d-flex justify-content-center align-items-center">
             <img src="../../../assets/img/brandeasyscheduling.png" class="img-fluid mx-auto" alt="Brand image">
           </div>
+
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example13">Email address</label>
+            <label class="form-label" for="form1Example13">Endereço de e-mail</label>
             <input type="email" id="form1Example13" class="form-control form-control-lg" />
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example23">Password</label>
+            <label class="form-label" for="form1Example23">Senha</label>
             <div class="input-group">
               <input [type]="isPasswordVisible ? 'text' : 'password'" id="form1Example23"
                 class="form-control form-control-lg" />
@@ -34,14 +34,14 @@
             <!-- Checkbox -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-              <label class="form-check-label" for="form1Example3"> Remember me </label>
+              <label class="form-check-label" for="form1Example3"> Lembrar-me </label>
             </div>
-            <a href="#!">Forgot password?</a>
+            <a href="#!">Esqueceu sua senha?</a>
           </div>
 
           <!-- Submit button -->
           <div class="d-flex justify-content-center align-items-center">
-            <button type="submit" class="btn btn-primary btn-lg btn-block mx-auto">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block mx-auto">Entrar</button>
           </div>
 
           <!--Alert-->
@@ -49,15 +49,14 @@
 
 
           <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">Ou</p>
           </div>
 
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
-            <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-          </a>
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button">
-            <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
-
+          <div class="d-flex justify-content-center align-items-center">
+            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
+              <i class="fas fa-plus me-2"></i>Cadastrar-me
+            </a>
+          </div>
         </form>
       </div>
     </div>
