@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
+import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,19 @@ import { UserService } from 'src/app/services/user/user.service';
 export class LoginComponent {
   public isPasswordVisible = false;
   public error = '';
+  showError: boolean = false;
+  public email: string = '';
+  public password: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private formValidationService: FormValidationService
+  ) {}
 
   togglePasswordVisibility() {
     const passwordField = document.getElementById(
-      'form1Example23'
+      'password'
     ) as HTMLInputElement;
     if (passwordField !== null) {
       passwordField.type =
@@ -26,17 +35,30 @@ export class LoginComponent {
     }
   }
 
-  onSubmit(email: string, password: string) {
-    const user = { email, password };
-    this.userService.login(user).subscribe(
-      (data) => {
-        console.log('data to login', data);
-        // Aqui você pode redirecionar o usuário para a página de dashboard ou fazer qualquer outra coisa que desejar
-      },
-      (error) => {
-        console.log(error);
-        this.error = error.error.message;
-      }
+  onSubmit() {
+    const emailError = this.formValidationService.validateEmail(this.email);
+    const passwordError = this.formValidationService.validatePassword(
+      this.password
     );
+
+    if (emailError) {
+      this.showError = true;
+      this.error = emailError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    if (passwordError) {
+      this.showError = true;
+      this.error = passwordError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    console.log(this.email, this.password);
   }
 }
