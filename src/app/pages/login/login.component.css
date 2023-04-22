@@ -133,6 +133,9 @@
   width: 100%;
   align-self: center;
 }
+.password-input-container i:hover {
+  color: #666;
+}
 .login-button-login {
   margin: mixed;
   display: flex;

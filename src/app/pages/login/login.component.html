@@ -13,21 +13,22 @@
       <div class="login-login-form">
         <div class="login-login-email">
           <span class="login-text-email">E-mail</span>
-          <input type="text" placeholder="Digite seu e-mail" class="login-textinput input" />
+          <input type="text" placeholder="Digite seu e-mail" class="login-textinput input" [(ngModel)]="email" />
         </div>
         <div class="login-login-password">
           <span class="login-text-password">Senha</span>
-          <input type="text" placeholder="Digite sua senha" class="login-textinput1 input" />
+          <input type="password" placeholder="Digite sua senha" class="login-textinput1 input" [(ngModel)]="password" />
         </div>
       </div>
       <div class="login-button-login">
-        <button type="button" class="login-button-register">
-          <span class="login-text1"><span>Registrar</span></span>
+        <button type="button" class="login-button-register" (click)="login()">
+          <span class="login-text1"><span>Acessar</span></span>
         </button>
       </div>
+
       <div class="login-button-login1">
         <button type="button" class="login-button-login2">
-          <span class="login-text3">Acessar</span>
+          <span class="login-text3">Registrar-se</span>
         </button>
       </div>
     </main>
