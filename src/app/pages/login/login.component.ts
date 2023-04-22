@@ -61,4 +61,11 @@ export class LoginComponent {
 
     console.log(this.email, this.password);
   }
+
+  redirectToRegister() {
+    this.router.navigate(['/register']);
+  }
+  redirectToRecovery() {
+    this.router.navigate(['/recovery']);
+  }
 }
