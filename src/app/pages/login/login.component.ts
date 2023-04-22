@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,9 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   public isPasswordVisible = false;
+  public error = '';
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   togglePasswordVisibility() {
     const passwordField = document.getElementById(
@@ -22,5 +24,19 @@ export class LoginComponent {
         showPasswordIcon.classList.toggle('fa-eye-slash');
       }
     }
+  }
+
+  onSubmit(email: string, password: string) {
+    const user = { email, password };
+    this.userService.login(user).subscribe(
+      (data) => {
+        console.log(data);
+        // Aqui você pode redirecionar o usuário para a página de dashboard ou fazer qualquer outra coisa que desejar
+      },
+      (error) => {
+        console.log(error);
+        this.error = error.error.message;
+      }
+    );
   }
 }

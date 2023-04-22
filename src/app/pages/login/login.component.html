@@ -44,6 +44,10 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block mx-auto">Sign in</button>
           </div>
 
+          <!--Alert-->
+          <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
           </div>
