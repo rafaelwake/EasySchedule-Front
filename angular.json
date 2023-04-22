@@ -74,8 +74,8 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/normalize.css/normalize.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/normalize.css/normalize.css"
             ],
             "scripts": []
           }
