@@ -30,6 +30,12 @@ export class UserService {
   login(user: any) {
     console.log('data to login', user);
 
-    // return this.http.post(`${this.baseUrl}/login`, user);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    const options = { headers: headers };
+    console.log(user, options);
+    return this.http.post(`${this.baseUrl}/auth`, user);
   }
 }

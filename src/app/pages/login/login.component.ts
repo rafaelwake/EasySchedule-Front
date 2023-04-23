@@ -59,12 +59,31 @@ export class LoginComponent {
       return;
     }
 
-    console.log(this.email, this.password);
+    const user = {
+      email: this.email,
+      password: this.password,
+    };
+
+    this.userService.login(user).subscribe(
+      (response) => {
+        console.log(response);
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.log(error);
+        this.showError = true;
+        this.error = 'Invalid email or password';
+        setTimeout(() => {
+          this.showError = false;
+        }, 2000);
+      }
+    );
   }
 
   redirectToRegister() {
     this.router.navigate(['/register']);
   }
+
   redirectToRecovery() {
     this.router.navigate(['/recovery']);
   }
