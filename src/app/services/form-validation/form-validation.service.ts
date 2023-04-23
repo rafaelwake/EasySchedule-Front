@@ -29,4 +29,27 @@ export class FormValidationService {
 
     return null;
   }
+
+  validateName(name: string): string | null {
+    if (!name) {
+      return 'Nome é obrigatório';
+    }
+
+    return null;
+  }
+
+  validatePasswordConfirmation(
+    password: string,
+    passwordConfirmation: string
+  ): string | null {
+    if (!passwordConfirmation) {
+      return 'Confirmação de senha é obrigatória';
+    }
+
+    if (password !== passwordConfirmation) {
+      return 'As senhas não coincidem';
+    }
+
+    return null;
+  }
 }

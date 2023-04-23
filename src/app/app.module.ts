@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
     RegisterComponent,
     DashboardComponent,
     RecoveryComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
