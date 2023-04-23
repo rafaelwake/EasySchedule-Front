@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -12,10 +13,12 @@ export class RegisterComponent {
   public isPasswordVisible = false;
   public error = '';
   showError: boolean = false;
-  public email: string = '';
-  public password: string = '';
   public passwordConfirmation: string = '';
-  public name: string = '';
+  public user: UserModel = {
+    name: '',
+    email: '',
+    password: '',
+  };
 
   constructor(
     private userService: UserService,
@@ -38,14 +41,16 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    const emailError = this.formValidationService.validateEmail(this.email);
-    const passwordError = this.formValidationService.validatePassword(
-      this.password
+    const emailError = this.formValidationService.validateEmail(
+      this.user.email
     );
-    const nameError = this.formValidationService.validateName(this.name);
+    const passwordError = this.formValidationService.validatePassword(
+      this.user.password
+    );
+    const nameError = this.formValidationService.validateName(this.user.name);
     const passwordValidationError =
       this.formValidationService.validatePasswordConfirmation(
-        this.password,
+        this.user.password,
         this.passwordConfirmation
       );
 
@@ -98,7 +103,16 @@ export class RegisterComponent {
       return;
     }
 
-    console.log(this.email, this.password, this.name);
+    console.log(this.user);
+
+    this.userService.createUser(this.user).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   redirectToLogin() {
