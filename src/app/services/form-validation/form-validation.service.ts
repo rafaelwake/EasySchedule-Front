@@ -17,7 +17,7 @@ export class FormValidationService {
     return null;
   }
 
-  validatePassword(password: string): string | null {
+  validatePassword(password: any): string | null {
     if (!password) {
       return 'Senha é obrigatória';
     }
@@ -39,7 +39,7 @@ export class FormValidationService {
   }
 
   validatePasswordConfirmation(
-    password: string,
+    password: any,
     passwordConfirmation: string
   ): string | null {
     if (!passwordConfirmation) {

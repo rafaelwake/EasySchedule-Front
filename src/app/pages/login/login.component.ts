@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
+import { UserModel } from 'src/app/models/user.model';
+import { SessionModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ export class LoginComponent {
   showError: boolean = false;
   public email: string = '';
   public password: string = '';
+  public rememberMe: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -65,9 +68,28 @@ export class LoginComponent {
     };
 
     this.userService.login(user).subscribe(
-      (response) => {
-        console.log(response);
-        this.router.navigate(['/dashboard']);
+      (response: any) => {
+        if (response.success) {
+          const session: SessionModel = {
+            token: response.data.token,
+            id: response.data.user.id,
+            createdAt: response.data.user.createdAt,
+            user: {
+              email: response.data.user.email,
+              name: response.data.user.name,
+            },
+          };
+          if (this.rememberMe) {
+            localStorage.setItem('session', JSON.stringify(session));
+          }
+          this.router.navigate(['/dashboard'], { state: { session } });
+        } else {
+          this.showError = true;
+          this.error = response.message;
+          setTimeout(() => {
+            this.showError = false;
+          }, 2000);
+        }
       },
       (error) => {
         console.log(error);
@@ -86,5 +108,10 @@ export class LoginComponent {
 
   redirectToRecovery() {
     this.router.navigate(['/recovery']);
+  }
+
+  onChangeRememberMe(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    this.rememberMe = checkbox.checked;
   }
 }

@@ -24,7 +24,7 @@ export class UserService {
     });
     const options = { headers: headers };
     console.log(user, options);
-    return this.http.post(`${this.baseUrl}/user/register`, user);
+    return this.http.post(`${this.baseUrl}/user/register`, user, options);
   }
 
   login(user: any) {
@@ -36,6 +36,6 @@ export class UserService {
     });
     const options = { headers: headers };
     console.log(user, options);
-    return this.http.post(`${this.baseUrl}/auth`, user);
+    return this.http.post(`${this.baseUrl}/auth`, user, options);
   }
 }
