@@ -1,10 +1,125 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
+import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  public isPasswordVisible = false;
+  public error = '';
+  showError: boolean = false;
+  public passwordConfirmation: string = '';
+  public user: UserModel = {
+    name: '',
+    email: '',
+    password: '',
+  };
 
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private formValidationService: FormValidationService
+  ) {}
+
+  togglePasswordVisibility(passwordFieldId: string, buttonClicked: Event) {
+    const passwordField = document.getElementById(
+      passwordFieldId
+    ) as HTMLInputElement;
+    if (passwordField !== null) {
+      passwordField.type =
+        passwordField.type === 'password' ? 'text' : 'password';
+      const showPasswordIcon = buttonClicked.target as HTMLElement;
+      if (showPasswordIcon !== null) {
+        showPasswordIcon.classList.toggle('fa-eye-slash');
+      }
+    }
+  }
+
+  onSubmit() {
+    const emailError = this.formValidationService.validateEmail(
+      this.user.email
+    );
+    const passwordError = this.formValidationService.validatePassword(
+      this.user.password
+    );
+    const nameError = this.formValidationService.validateName(this.user.name);
+    const passwordValidationError =
+      this.formValidationService.validatePasswordConfirmation(
+        this.user.password,
+        this.passwordConfirmation
+      );
+
+    if (nameError) {
+      this.showError = true;
+      this.error = nameError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    if (emailError) {
+      this.showError = true;
+      this.error = emailError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    if (passwordError) {
+      this.showError = true;
+      this.error = passwordError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    if (passwordValidationError) {
+      this.showError = true;
+      this.error = passwordValidationError;
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    const isAccepted = (
+      document.getElementById('form1Example3') as HTMLInputElement
+    ).checked;
+
+    if (!isAccepted) {
+      this.showError = true;
+      this.error = 'Você precisa aceitar os termos de uso e privacidade';
+      setTimeout(() => {
+        this.showError = false;
+      }, 2000);
+      return;
+    }
+
+    console.log(this.user);
+
+    this.userService.createUser(this.user).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  redirectToRecovery() {
+    this.router.navigate(['/recovery']);
+  }
 }

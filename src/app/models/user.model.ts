@@ -1,6 +1,12 @@
 export interface UserModel {
-  id: number;
   name: string;
   email: string;
-  password: string;
+  password?: string;
+}
+
+export interface SessionModel {
+  id: string;
+  user: UserModel;
+  token: string;
+  createdAt: Date;
 }
