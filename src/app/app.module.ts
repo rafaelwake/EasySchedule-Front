@@ -15,6 +15,9 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { AppointmentComponent } from './components/appointment/appointment.component';
+import { AppointmentModalComponent } from './components/appointment-modal/appointment-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     RecoveryComponent,
     FooterComponent,
     CalendarComponent,
+    AppointmentComponent,
+    AppointmentModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
