@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
     DashboardComponent,
     RecoveryComponent,
     FooterComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
