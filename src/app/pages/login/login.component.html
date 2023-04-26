@@ -1,76 +1,71 @@
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-
-      <div class="col-md-7 col-lg-5 col-xl-12 offset-xl-1">
-
-        <form>
-          <div class="d-flex justify-content-center align-items-center">
-            <img src="../../../assets/img/brandeasyscheduling.png" class="img-fluid mx-auto" alt="Brand image">
-          </div>
-          <div class="d-flex flex-wrap justify-content-center align-items-center">
-            <h6>A plataforma que te ajuda a organizar seu dia a dia</h6>
-          </div>
-
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example13">E-mail</label>
-            <input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="email" name="email"
-              required />
-          </div>
-
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example23">Senha</label>
-            <div class="input-group">
-              <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" class="form-control form-control-lg"
-                [(ngModel)]="password" name="password" required />
-              <button class="btn btn-outline-secondary" type="button" id="show-password"
-                (click)="togglePasswordVisibility()">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-
-
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="remember-me-checkbox"
-                (change)="onChangeRememberMe($event)">
-              <label class="form-check-label" for="remember-me-checkbox">Lembrar-me</label>
-            </div>
-
-            <!-- Recovery page -->
-            <span class="btn-link" (click)="redirectToRecovery()" style="cursor: pointer;">Esqueceu sua senha?</span>
-          </div>
-
-          <!-- Submit button -->
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-lg btn-block mx-auto" (click)="onSubmit()">Entrar</button>
-          </div>
-
-          <!--Alert-->
-          <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
-
-
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">Ou</p>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" type="button"
-              (click)="redirectToRegister()">
-              <i class="fas fa-plus me-2"></i>Cadastrar-me
-            </button>
-          </div>
-
-        </form>
-      </div>
+<section class="min-h-screen flex items-center justify-center bg-gray-50">
+  <div>
+    <div class="text-center mb-8">
+      <img src="../../../assets/img/brandeasyscheduling.png" class="mx-auto h-13 w-auto" alt="Brand image">
+      <h2 class="mt-6 text-center text-2xl font-extrabold text-gray-900">
+        Seus Compromissos Organizados</h2>
     </div>
+
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <!-- Email input -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">E-mail</label>
+        <input type="email" id="email"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          [(ngModel)]="email" name="email" required>
+      </div>
+
+      <!-- Password input -->
+      <div class="mb-6 relative">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Senha</label>
+        <input [type]="isPasswordVisible ? 'text' : 'password'" id="password"
+          class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          [(ngModel)]="password" name="password" required>
+        <span class="absolute right-0 top-6 bottom-0 my-auto mr-2 flex items-center h-full" type="button"
+          id="show-password" (click)="togglePasswordVisibility()">
+          <i class="fas fa-eye"></i>
+        </span>
+      </div>
+
+
+      <div class="flex items-center justify-between mb-6">
+        <!-- Checkbox -->
+        <label class="form-check">
+          <input class="form-check-input" type="checkbox" id="remember-me-checkbox"
+            (change)="onChangeRememberMe($event)">
+          <span class="text-sm text-gray-600">Lembrar-me</span>
+        </label>
+
+        <!-- Recovery page -->
+        <span class="text-blue-500 hover:text-blue-700 text-sm cursor-pointer" (click)="redirectToRecovery()">Esqueceu
+          sua senha?</span>
+      </div>
+
+      <!-- Submit button -->
+      <div class="flex items-center justify-center mb-6">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="button" (click)="onSubmit()">Entrar</button>
+      </div>
+
+      <!--Alert-->
+      <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
+
+      <div class="flex items-center">
+        <div class="border-t border-gray-300 flex-grow mx-3"></div>
+        <p class="text-center text-gray-500 text-sm">Ou</p>
+        <div class="border-t border-gray-300 flex-grow mx-3"></div>
+      </div>
+
+      <div class="flex items-center justify-center mt-4">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          type="button" (click)="redirectToRegister()">
+          <i class="fas fa-plus me-2"></i>Cadastrar-me
+        </button>
+      </div>
+    </form>
+
   </div>
 </section>
-
 <app-footer></app-footer>

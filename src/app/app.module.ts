@@ -18,6 +18,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { AppointmentModalComponent } from './components/appointment-modal/appointment-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SchedulingComponent } from './components/scheduling/scheduling.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CalendarComponent,
     AppointmentComponent,
     AppointmentModalComponent,
+    SchedulingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,95 +1,92 @@
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-
-      <div class="col-md-7 col-lg-5 col-xl-12 offset-xl-1">
-
-        <form>
-          <div class="d-flex justify-content-center align-items-center">
-            <img src="../../../assets/img/brandeasyscheduling.png" class="img-fluid mx-auto" alt="Brand image">
-          </div>
-
-          <div class="d-flex flex-wrap justify-content-center align-items-center">
-            <h5>Criar Nova Conta</h5>
-            <p style="width: 100%; margin-left: 20%;">Insira os dados para cadastro</p>
-          </div>
-
-          <!-- Nome input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example13">Nome</label>
-            <input type="text" id="name" class="form-control form-control-lg" [(ngModel)]="user.name" name="name"
-              required />
-          </div>
-
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example13">E-mail</label>
-            <input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="user.email" name="email"
-              required />
-          </div>
-
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example23">Senha</label>
-            <div class="input-group">
-              <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" class="form-control form-control-lg"
-                [(ngModel)]="user.password" name="password" required />
-              <button class="btn btn-outline-secondary" type="button" id="show-password"
-                (click)="togglePasswordVisibility('password', $event)">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Repeat Password input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form1Example23">Confirme a Senha</label>
-            <div class="input-group">
-              <input [type]="isPasswordVisible ? 'text' : 'password'" id="password-confirmation"
-                class="form-control form-control-lg" [(ngModel)]="passwordConfirmation" name="passwordConfirmation"
-                required />
-              <button class="btn btn-outline-secondary" type="button" id="show-password-confirmation"
-                (click)="togglePasswordVisibility('password-confirmation', $event)">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Checkbox -->
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3">
-              <label class="form-check-label" for="form1Example3">Eu aceito os termos de uso e privacidade</label>
-            </div>
-          </div>
-
-          <!-- Submit button -->
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" type="button"
-              (click)="onSubmit()">
-              <i class="fas fa-plus me-2"></i>Criar meu cadastro
-            </button>
-          </div>
-
-          <!--Alert-->
-          <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">Ou</p>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-lg btn-block" style="background-color: #04c4ff" type="button"
-              (click)="redirectToLogin()">
-              <i class="fas fa-arrow-left me-2"></i>
-              Acessar meu cadastro existente
-            </button>
-          </div>
-
-        </form>
-      </div>
+<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div class="text-center">
+      <img src="../../../assets/img/brandeasyscheduling.png" class="mx-auto h-13 w-auto" alt="Brand image">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Criar Nova Conta
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Insira os dados para cadastro
+      </p>
     </div>
+    <form class="mt-8 space-y-6">
+      <!-- Nome input -->
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nome</label>
+        <input type="text" id="name" name="name" [(ngModel)]="user.name"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>
+      </div>
+
+      <!-- Email input -->
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">E-mail</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>
+      </div>
+
+      <!-- Password input -->
+      <div class="mb-6 relative">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Senha</label>
+        <input [type]="isPasswordVisible ? 'text' : 'password'" id="password"
+          class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          [(ngModel)]="user.password" name="password" required>
+        <span class="absolute right-0 top-6 bottom-0 my-auto mr-2 flex items-center h-full" type="button"
+          id="show-password" (click)="togglePasswordVisibility('password', $event)">
+          <i class="fas fa-eye"></i>
+        </span>
+      </div>
+
+      <!-- Repeat Password input -->
+      <div class="mb-6 relative">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password-confirmation">Confirme a Senha</label>
+        <input [type]="isPasswordVisible ? 'text' : 'password'" id="password-confirmation"
+          class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          [(ngModel)]="passwordConfirmation" name="passwordConfirmation" required>
+        <span class="absolute right-0 top-6 bottom-0 my-auto mr-2 flex items-center h-full" type="button"
+          id="show-password-confirmation" (click)="togglePasswordVisibility('password-confirmation', $event)">
+          <i class="fas fa-eye"></i>
+        </span>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input class="form-check-input h-5 w-5 text-indigo-600 rounded" type="checkbox" value="" id="form1Example3">
+          <label class="ml-2 block text-sm text-gray-900" for="form1Example3">
+            Eu aceito os termos de uso e privacidade
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center">
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          type="button" (click)="onSubmit()">
+          <i class="fas fa-plus me-2"></i>Criar meu cadastro
+        </button>
+      </div>
+
+      <!--Alert-->
+      <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
+
+      <div class="mt-8 flex items-center justify-center">
+        <div class="border-b border-gray-300 w-full"></div>
+        <span class="text-gray-600 px-2">Ou</span>
+        <div class="border-b border-gray-300 w-full"></div>
+      </div>
+
+      <div class="text-center mt-6">
+        <button
+          class="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          type="button" (click)="redirectToLogin()">
+          <i class="fas fa-arrow-left me-2"></i>
+          Acessar meu cadastro existente
+        </button>
+      </div>
+    </form>
   </div>
 </section>
-
 <app-footer></app-footer>
