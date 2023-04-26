@@ -13,6 +13,8 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
 import { AppointmentModel } from 'src/app/models/appointment.model';
+import { ViewChild } from '@angular/core';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-calendar',
@@ -20,6 +22,8 @@ import { AppointmentModel } from 'src/app/models/appointment.model';
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent {
+  @ViewChild('sidenav') sidenav!: NgbCollapse;
+
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
@@ -122,5 +126,17 @@ export class CalendarComponent {
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
+  }
+
+  toggleSidebar() {
+    this.sidenav.toggle();
+  }
+
+  createNewAppointment() {
+    // Adicione a lógica para criar um novo compromisso aqui
+  }
+
+  logout() {
+    // Adicione a lógica para sair aqui
   }
 }

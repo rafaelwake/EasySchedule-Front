@@ -24,7 +24,13 @@ export class AppointmentModalComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [this.appointment.title, Validators.required],
       description: [this.appointment.description, Validators.required],
-      // Adicione outros campos conforme necessário
+      date: [this.appointment.date, Validators.required],
+      duration: [
+        this.appointment.duration,
+        [Validators.required, Validators.min(1)],
+      ],
+      location: [this.appointment.location, Validators.required],
+      invite: [this.appointment.invite, [Validators.email]],
     });
   }
 
@@ -32,7 +38,15 @@ export class AppointmentModalComponent implements OnInit {
     if (this.form.valid) {
       this.appointment.title = this.form.get('title')?.value;
       this.appointment.description = this.form.get('description')?.value;
-      // Atualize outros campos conforme necessário
+      this.appointment.date = this.form.get('date')?.value;
+      this.appointment.duration = this.form.get('duration')?.value;
+      this.appointment.location = this.form.get('location')?.value;
+      this.appointment.invite = this.form
+        .get('invite')
+        ?.value.split(';')
+        .map((email: string) => email.trim());
+
+      console.log('objeto final', this.appointment);
 
       this.createAppointmentsService
         .createAppointment(this.appointment)
