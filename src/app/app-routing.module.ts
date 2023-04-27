@@ -10,15 +10,22 @@ import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
 import { MembersComponent } from './pages/dashboard/members/members.component';
 import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
 import { AboutComponent } from './pages/dashboard/about/about.component';
+import { AuthGuard } from './auth.guard';
+import { RedirectAuthGuard } from './redirect-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [RedirectAuthGuard],
+  },
   { path: 'register', component: RegisterComponent },
   { path: 'recovery', component: RecoveryComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'agenda', pathMatch: 'full' },
       { path: 'agenda', component: AgendaComponent },

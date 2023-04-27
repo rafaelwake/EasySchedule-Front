@@ -16,11 +16,44 @@ export class SessionService {
   constructor(private router: Router) {}
 
   getSession(): SessionModel {
-    return this.session;
+    console.log('inico', this.session);
+    if (this.session.token !== '') {
+      console.log('primeiro', this.session);
+      return this.session;
+    } else {
+      const session = this.getSessionFromSessionStorage();
+      if (session != null) {
+        this.session = session;
+        console.log('segundo', this.session);
+        return this.session;
+      } else {
+        throw new Error('Session not found');
+      }
+    }
+  }
+
+  getSessionFromSessionStorage(): SessionModel | null {
+    const sessionStr = sessionStorage.getItem('session');
+    if (sessionStr) {
+      const session = JSON.parse(sessionStr);
+      return session;
+    } else {
+      const sessionStr = this.getSessionFromLocalStorage();
+      if (sessionStr) {
+        const session = sessionStr;
+        return session;
+      }
+    }
+    return null;
   }
 
   setSession(session: SessionModel): void {
     this.session = session;
+    this.setSessionInSessionStorage(session);
+  }
+
+  setSessionInSessionStorage(session: SessionModel): void {
+    sessionStorage.setItem('session', JSON.stringify(session));
   }
 
   getSessionFromLocalStorage(): SessionModel | null {
@@ -44,6 +77,7 @@ export class SessionService {
       createdAt: new Date(),
     };
     localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 }
