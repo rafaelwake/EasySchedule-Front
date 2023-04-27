@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
-import { UserModel } from 'src/app/models/user.model';
 import { SessionModel } from 'src/app/models/user.model';
+import { SessionService } from 'src/app/services/user/session.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,8 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private formValidationService: FormValidationService
+    private formValidationService: FormValidationService,
+    private sessionService: SessionService // Injeta o serviço SessionService
   ) {}
 
   togglePasswordVisibility() {
@@ -79,10 +80,11 @@ export class LoginComponent {
               name: response.data.user.name,
             },
           };
+          this.sessionService.setSession(session); // Armazena o objeto session no serviço
           if (this.rememberMe) {
             localStorage.setItem('session', JSON.stringify(session));
           }
-          this.router.navigate(['/dashboard'], { state: { session } });
+          this.router.navigate(['/dashboard']); // Navega para a página de dashboard
         } else {
           this.showError = true;
           this.error = response.message;
