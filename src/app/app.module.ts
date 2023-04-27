@@ -19,6 +19,7 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { AppointmentModalComponent } from './components/appointment-modal/appointment-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulingComponent } from './components/scheduling/scheduling.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SchedulingComponent } from './components/scheduling/scheduling.componen
     AppointmentComponent,
     AppointmentModalComponent,
     SchedulingComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
