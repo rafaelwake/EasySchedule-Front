@@ -20,6 +20,11 @@ import { AppointmentModalComponent } from './components/appointment-modal/appoin
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulingComponent } from './components/scheduling/scheduling.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AgendaComponent } from './pages/dashboard/agenda/agenda.component';
+import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
+import { MembersComponent } from './pages/dashboard/members/members.component';
+import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
+import { AboutComponent } from './pages/dashboard/about/about.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AppointmentModalComponent,
     SchedulingComponent,
     SidebarComponent,
+    AgendaComponent,
+    KanbanComponent,
+    MembersComponent,
+    QuickGuideComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

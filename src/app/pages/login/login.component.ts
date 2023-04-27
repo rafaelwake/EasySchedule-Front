@@ -80,11 +80,11 @@ export class LoginComponent {
               name: response.data.user.name,
             },
           };
-          this.sessionService.setSession(session); // Armazena o objeto session no serviço
+          this.sessionService.setSession(session);
           if (this.rememberMe) {
-            localStorage.setItem('session', JSON.stringify(session));
+            this.sessionService.setSessionInLocalStorage(session);
           }
-          this.router.navigate(['/dashboard']); // Navega para a página de dashboard
+          this.router.navigate(['/dashboard']);
         } else {
           this.showError = true;
           this.error = response.message;

@@ -64,7 +64,7 @@
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
                     <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                    <a href="#"
+                    <a (click)="navigateTo('agenda')"
                       class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -140,7 +140,7 @@
             <ul role="list" class="-mx-2 space-y-1">
               <li>
                 <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                <a href="#"
+                <button (click)="navigateTo('agenda')"
                   class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -148,10 +148,10 @@
                       d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                   </svg>
                   Minha Agenda
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#"
+                <button (click)="navigateTo('kanban')"
                   class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -159,10 +159,10 @@
                       d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                   </svg>
                   Kanban
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#"
+                <button (click)="navigateTo('members')"
                   class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                   <svg class="h-6 w-6 shrink-0 text-gray-600 group-hover:text-indigo-600" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -170,10 +170,10 @@
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                   </svg>
                   Membros
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#"
+                <button (click)="navigateTo('quick-guide')"
                   class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -181,10 +181,10 @@
                       d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                   </svg>
                   Guia rápido
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#"
+                <button (click)="navigateTo('about')"
                   class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -192,7 +192,7 @@
                       d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                   </svg>
                   Sobre
-                </a>
+                </button>
               </li>
             </ul>
           </li>
@@ -218,7 +218,7 @@
               <span class="hidden lg:flex lg:items-center">
                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">Seja Bem Vindo {{
                   session.user.name }}!</span>
-                <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <svg class="ml-2 h-8 w-8 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd"
                     d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
                     clip-rule="evenodd" />
@@ -241,8 +241,8 @@
               role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
               [hidden]="dropdownHidden">
               <!-- Active: "bg-gray-50", Not Active: "" -->
-              <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1"
-                id="user-menu-item-1">Sair</a>
+              <button (click)="logout()" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem"
+                tabindex="-1" id="user-menu-item-1">Sair</button>
             </div>
           </div>
         </ul>
@@ -266,9 +266,5 @@
     </a>
   </div>
 
-  <main class="py-10 lg:pl-72">
-    <div class="px-4 sm:px-6 lg:px-8">
-      <!-- Your content -->
-    </div>
-  </main>
+
 </div>
