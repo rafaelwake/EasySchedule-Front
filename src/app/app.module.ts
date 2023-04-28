@@ -25,6 +25,7 @@ import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
 import { MembersComponent } from './pages/dashboard/members/members.component';
 import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
 import { AboutComponent } from './pages/dashboard/about/about.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AboutComponent } from './pages/dashboard/about/about.component';
     MembersComponent,
     QuickGuideComponent,
     AboutComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
