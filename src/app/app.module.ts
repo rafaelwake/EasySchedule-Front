@@ -13,6 +13,19 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AppointmentComponent } from './components/appointment/appointment.component';
+import { AppointmentModalComponent } from './components/appointment-modal/appointment-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SchedulingComponent } from './components/scheduling/scheduling.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AgendaComponent } from './pages/dashboard/agenda/agenda.component';
+import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
+import { MembersComponent } from './pages/dashboard/members/members.component';
+import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
+import { AboutComponent } from './pages/dashboard/about/about.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +35,17 @@ import { FooterComponent } from './components/footer/footer.component';
     DashboardComponent,
     RecoveryComponent,
     FooterComponent,
+    CalendarComponent,
+    AppointmentComponent,
+    AppointmentModalComponent,
+    SchedulingComponent,
+    SidebarComponent,
+    AgendaComponent,
+    KanbanComponent,
+    MembersComponent,
+    QuickGuideComponent,
+    AboutComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +54,8 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FullCalendarModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

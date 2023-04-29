@@ -38,4 +38,16 @@ export class UserService {
     console.log(user, options);
     return this.http.post(`${this.baseUrl}/auth`, user, options);
   }
+
+  recovery(email: any) {
+    console.log('data to login', email);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    const options = { headers: headers };
+    console.log(email, options);
+    return this.http.post(`${this.baseUrl}/recovery`, email, options);
+  }
 }

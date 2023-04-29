@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
 import { SessionModel } from 'src/app/models/user.model';
-
-interface MyActivatedRouteSnapshot extends ActivatedRouteSnapshot {
-  session?: SessionModel;
-}
+import { SessionService } from 'src/app/services/user/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,20 +8,19 @@ interface MyActivatedRouteSnapshot extends ActivatedRouteSnapshot {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  session: SessionModel = {
-    id: '',
-    user: { name: '', email: '' },
-    token: '',
-    createdAt: new Date(),
-  };
+  session: SessionModel;
 
-  constructor() {}
+  constructor(private sessionService: SessionService) {
+    this.session = {
+      // Inicializa a propriedade session no construtor
+      id: '',
+      user: { name: '', email: '' },
+      token: '',
+      createdAt: new Date(),
+    };
+  }
 
   ngOnInit(): void {
-    const routeSnapshot: MyActivatedRouteSnapshot = window.history.state;
-    if (routeSnapshot.session) {
-      this.session = routeSnapshot.session;
-    }
-    console.log('object:', this.session);
+    this.session = this.sessionService.getSession(); // Obtém o objeto session do serviço
   }
 }

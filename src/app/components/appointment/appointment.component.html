@@ -1,0 +1,30 @@
+<div *ngIf="showDialogFlag">
+  <form #appointmentForm="ngForm" (ngSubmit)="onSubmit(appointmentForm)">
+    <div>
+      <label>Title:</label>
+      <input type="text" name="title" [(ngModel)]="appointment.title" required>
+    </div>
+    <div>
+      <label>Description:</label>
+      <textarea name="description" [(ngModel)]="appointment.description"></textarea>
+    </div>
+    <div>
+      <label>Date:</label>
+      <input type="datetime-local" name="date" [(ngModel)]="appointment.date" required>
+    </div>
+    <div>
+      <label>Duration:</label>
+      <input type="number" name="duration" [(ngModel)]="appointment.duration" required>
+    </div>
+    <div>
+      <label>Location:</label>
+      <input type="text" name="location" [(ngModel)]="appointment.location" required>
+    </div>
+    <div>
+      <label>Invite:</label>
+      <input type="text" name="invite" [(ngModel)]="appointment.invite" required>
+    </div>
+    <button type="submit">Submit</button>
+    <button (click)="showDialogFlag = false">Cancel</button>
+  </form>
+</div>
