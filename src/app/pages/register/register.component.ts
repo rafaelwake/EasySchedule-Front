@@ -21,13 +21,16 @@ export class RegisterComponent {
     email: '',
     password: '',
   };
+  successMessage: string;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private formValidationService: FormValidationService,
     private modalService: NgbModal
-  ) {}
+  ) {
+    this.successMessage = '';
+  }
 
   openTermsModal() {
     const modalRef = this.modalService.open(TermsModalComponent);
@@ -114,11 +117,28 @@ export class RegisterComponent {
     console.log(this.user);
 
     this.userService.createUser(this.user).subscribe(
-      (result) => {
-        console.log(result);
+      (response: any) => {
+        if (response.success) {
+          this.successMessage =
+            'Conta criada com sucesso! Redirecionando para área de Entrar...';
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+        } else {
+          this.showError = true;
+          this.error = response.message;
+          setTimeout(() => {
+            this.showError = false;
+          }, 2000);
+        }
       },
       (error) => {
         console.log(error);
+        this.showError = true;
+        this.error = error;
+        setTimeout(() => {
+          this.showError = false;
+        }, 2000);
       }
     );
   }
