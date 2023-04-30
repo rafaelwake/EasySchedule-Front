@@ -1,42 +1,37 @@
-<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-  <div class="max-w-md w-full space-y-8">
-    <div>
-      <img class="mx-auto h-13 w-auto" src="../../../assets/img/logo.png" alt="Brand image">
-    </div>
-    <h2 class="mt-0 text-center text-2xl font-extrabold text-gray-600">
-      Recuperação da conta
-    </h2>
-    <p class="mt-2 text-center text-sm text-gray-600">
-      Insira seu e-mail para enviar o link de recuperação
-    </p>
-    <form class="mt-8 space-y-6">
-      <div class="rounded-md shadow-sm">
-        <div>
-          <label for="email" class="sr-only">E-mail</label>
-          <input id="email" name="email" type="email" [(ngModel)]="email" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Endereço de e-mail">
-        </div>
-      </div>
+<section class="flex flex-col items-center justify-center h-screen w-full bg-violet-100 py-3">
+  <div class="flex flex-col lg:flex-row p-3 rounded-3xl shadow-lg bg-white">
+    <div class="flex flex-col gap-3 py-3 items-center justify-center px-3">
+      <button (click)="redirectToLogin()" class="flex text-indigo-600 w-full items-center text-lg gap-3">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar
+      </button>
+      <h2 class="py-3 text-zinc-800 font-extrabold text-2xl md:text-2xl">
+        Recuperar a sua Conta
+      </h2>
+      <form class="flex flex-col w-full h-full items-center gap-3 px-4">
 
-      <div>
-        <button type="button" (click)="sendRecoveryEmail()"
-          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Enviar e-mail
-        </button>
-      </div>
+        <div class="flex flex-col w-full">
+          <label for="email" class="font-semibold text-sm text-zinc-900 px-2">E-mail <span
+              class="text-red-500">*</span></label>
+          <input required type="email" name="email" [(ngModel)]="email"
+            class="rounded-full py-1 px-2 focus:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus:border-gray-300" />
+        </div>
+
+
+      </form>
 
       <!--Alert-->
-      <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
-
-      <div class="text-center mt-6">
-        <button type="button" (click)="redirectToLogin()" class="text-indigo-600 hover:text-indigo-500 font-medium">
-          <i class="fas fa-arrow-left me-2"></i>
-          Voltar para área de login
+      <div *ngIf="showError" class="alert alert-danger  text-sm">{{ error }}</div>
+      <div class="flex flex-col w-full justify-center items-center gap-2 pt-2">
+        <button type="button" (click)="sendRecoveryEmail()"
+          class="py-1 px-2 rounded-full font-bold text-white w-full md:w-10/12 bg-indigo-600 hover:bg-indigo-500 ease-in-out transition duration-150">
+          Enviar e-mail de recuperação
         </button>
       </div>
-    </form>
+
+    </div>
   </div>
 </section>
+
 
 <app-footer></app-footer>

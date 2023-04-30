@@ -10,6 +10,7 @@ import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
 import { MembersComponent } from './pages/dashboard/members/members.component';
 import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
 import { AboutComponent } from './pages/dashboard/about/about.component';
+import { AccountComponent } from './pages/dashboard/account/account.component';
 import { AuthGuard } from './auth.guard';
 import { RedirectAuthGuard } from './redirect-auth.guard';
 
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'members', component: MembersComponent },
       { path: 'quick-guide', component: QuickGuideComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'account', component: AccountComponent },
     ],
   },
 ];

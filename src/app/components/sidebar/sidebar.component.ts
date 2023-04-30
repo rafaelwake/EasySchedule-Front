@@ -25,6 +25,30 @@ export class SidebarComponent {
       path: '/dashboard/members',
       icon: 'fa-solid fa-users',
     },
+    {
+      text: 'Kanban',
+      route: 'kanban',
+      path: '/dashboard/kanban',
+      icon: 'fa-solid fa-list',
+    },
+    {
+      text: 'Minha Conta',
+      route: 'account',
+      path: '/dashboard/account',
+      icon: 'fa-solid fa-user',
+    },
+    {
+      text: 'Guia rápido',
+      route: 'quick-guide',
+      path: '/dashboard/quick-guide',
+      icon: 'fa-solid fa-circle-question',
+    },
+    {
+      text: 'Sobre',
+      route: 'about',
+      path: '/dashboard/about',
+      icon: 'fa-solid fa-handshake',
+    },
   ];
 
   ngOnInit() {

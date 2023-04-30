@@ -3,6 +3,8 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
 import { UserModel } from 'src/app/models/user.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TermsModalComponent } from 'src/app/components/terms-modal/terms-modal.component';
 
 @Component({
   selector: 'app-register',
@@ -23,8 +25,14 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private formValidationService: FormValidationService
+    private formValidationService: FormValidationService,
+    private modalService: NgbModal
   ) {}
+
+  openTermsModal() {
+    const modalRef = this.modalService.open(TermsModalComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 
   togglePasswordVisibility(passwordFieldId: string, buttonClicked: Event) {
     const passwordField = document.getElementById(

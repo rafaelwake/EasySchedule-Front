@@ -23,10 +23,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AgendaComponent } from './pages/dashboard/agenda/agenda.component';
 import { KanbanComponent } from './pages/dashboard/kanban/kanban.component';
 import { MembersComponent } from './pages/dashboard/members/members.component';
+import { AccountComponent } from './pages/dashboard/account/account.component';
 import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.component';
 import { AboutComponent } from './pages/dashboard/about/about.component';
 import { HeaderComponent } from './components/header/header.component';
-
+import { TermsModalComponent } from './components/terms-modal/terms-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,11 @@ import { HeaderComponent } from './components/header/header.component';
     AgendaComponent,
     KanbanComponent,
     MembersComponent,
+    AccountComponent,
     QuickGuideComponent,
     AboutComponent,
     HeaderComponent,
+    TermsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,7 @@ import { HeaderComponent } from './components/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
