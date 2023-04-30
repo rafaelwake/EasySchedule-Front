@@ -118,8 +118,4 @@ export class RegisterComponent {
   redirectToLogin() {
     this.router.navigate(['/login']);
   }
-
-  redirectToRecovery() {
-    this.router.navigate(['/recovery']);
-  }
 }

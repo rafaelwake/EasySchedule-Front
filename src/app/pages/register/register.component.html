@@ -1,55 +1,52 @@
-<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-  <div class="max-w-md w-full space-y-8">
-    <div class="text-center">
-      <img src="../../../assets/img/logo.png" class="mx-auto h-13 w-auto" alt="Brand image">
-      <h2 class="mt-0 text-center text-3xl font-extrabold text-gray-600">
-        Criar Nova Conta
+<section class="flex flex-col items-center justify-center h-screen w-full bg-violet-100 py-3">
+  <div class="flex flex-col lg:flex-row p-3 rounded-3xl shadow-lg bg-white">
+    <div class="flex flex-col gap-3 py-3 items-center justify-center px-3">
+      <button (click)="redirectToLogin()" class="flex text-indigo-600 w-full items-center text-lg gap-3">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar
+      </button>
+      <h2 class="py-3 text-zinc-800 font-extrabold text-2xl md:text-2xl">
+        Cadastro
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Insira os dados para cadastro
-      </p>
-    </div>
-    <form class="mt-8 space-y-6">
-      <!-- Nome input -->
-      <div>
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nome</label>
-        <input type="text" id="name" name="name" [(ngModel)]="user.name"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required>
-      </div>
-
-      <!-- Email input -->
-      <div>
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">E-mail</label>
-        <input type="email" id="email" name="email" [(ngModel)]="user.email"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required>
-      </div>
-
-      <!-- Password input -->
-      <div class="mb-6 relative">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Senha</label>
-        <input [type]="isPasswordVisible ? 'text' : 'password'" id="password"
-          class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          [(ngModel)]="user.password" name="password" required>
-        <span class="absolute right-0 top-6 bottom-0 my-auto mr-2 flex items-center h-full" type="button"
-          id="show-password" (click)="togglePasswordVisibility('password', $event)">
-          <i class="fas fa-eye"></i>
-        </span>
-      </div>
-
-      <!-- Repeat Password input -->
-      <div class="mb-6 relative">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password-confirmation">Confirme a Senha</label>
-        <input [type]="isPasswordVisible ? 'text' : 'password'" id="password-confirmation"
-          class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          [(ngModel)]="passwordConfirmation" name="passwordConfirmation" required>
-        <span class="absolute right-0 top-6 bottom-0 my-auto mr-2 flex items-center h-full" type="button"
-          id="show-password-confirmation" (click)="togglePasswordVisibility('password-confirmation', $event)">
-          <i class="fas fa-eye"></i>
-        </span>
-      </div>
-
+      <form class="flex flex-col w-full h-full items-center gap-3 px-4">
+        <div class="flex flex-col w-full">
+          <label for="name" class="font-semibold text-sm text-zinc-900 px-2">Nome<span
+              class="text-red-500">*</span></label>
+          <input required type="text" name="name" [(ngModel)]="user.name"
+            class="rounded-full py-1 px-2 focus:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus:border-gray-300" />
+        </div>
+        <div class="flex flex-col w-full">
+          <label for="email" class="font-semibold text-sm text-zinc-900 px-2">E-mail <span
+              class="text-red-500">*</span></label>
+          <input required type="email" name="email" [(ngModel)]="user.email"
+            class="rounded-full py-1 px-2 focus:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus:border-gray-300" />
+        </div>
+        <div class="flex flex-col w-full">
+          <label for="password" class="font-semibold text-sm text-zinc-900 px-2">Senha <span
+              class="text-red-500">*</span></label>
+          <div
+            class="flex items-center rounded-full py-1 px-1 focus-within:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus-within:border-gray-300">
+            <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" required type="password"
+              name="passwordConfirmation" required class="outline-none  px-2" [(ngModel)]="user.password" />
+            <span type="button" id="show-password" (click)="togglePasswordVisibility('password', $event)">
+              <i id="show-password" class="fa-solid fa-eye text-gray-400 hover:text-gray-500 cursor-pointer"></i>
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col w-full">
+          <label for="password" class="font-semibold text-sm text-zinc-900 px-2">Confirme a Senha <span
+              class="text-red-500">*</span></label>
+          <div
+            class="flex items-center rounded-full py-1 px-1 focus-within:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus-within:border-gray-300">
+            <input [type]="isPasswordVisible ? 'text' : 'password'" id="password-confirmation" required type="password"
+              name="passwordConfirmation" required class="outline-none  px-2" [(ngModel)]="passwordConfirmation" />
+            <span type="button" id="show-password-confirmation"
+              (click)="togglePasswordVisibility('password-confirmation', $event)">
+              <i id="show-password" class="fa-solid fa-eye text-gray-400 hover:text-gray-500 cursor-pointer"></i>
+            </span>
+          </div>
+        </div>
+      </form>
       <!-- Checkbox -->
       <div class="flex items-center justify-between">
         <div class="flex items-center">
@@ -59,34 +56,16 @@
           </label>
         </div>
       </div>
-
-      <!-- Submit button -->
-      <div class="text-center">
-        <button
-          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-          type="button" (click)="onSubmit()">
-          <i class="fas fa-plus me-2"></i>Criar meu cadastro
-        </button>
-      </div>
-
       <!--Alert-->
-      <div *ngIf="showError" class="alert alert-danger">{{ error }}</div>
-
-      <div class="mt-8 flex items-center justify-center">
-        <div class="border-b border-gray-300 w-full"></div>
-        <span class="text-gray-600 px-2">Ou</span>
-        <div class="border-b border-gray-300 w-full"></div>
-      </div>
-
-      <div class="text-center mt-6">
-        <button
-          class="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-          type="button" (click)="redirectToLogin()">
-          <i class="fas fa-arrow-left me-2"></i>
-          Acessar meu cadastro existente
+      <div *ngIf="showError" class="alert alert-danger  text-sm">{{ error }}</div>
+      <div class="flex flex-col w-full justify-center items-center gap-2 pt-2">
+        <button type="button" (click)="onSubmit()"
+          class="py-1 px-2 rounded-full font-bold text-white w-full md:w-10/12 bg-indigo-600 hover:bg-indigo-500 ease-in-out transition duration-150">
+          Finalizar cadastro
         </button>
       </div>
-    </form>
+
+    </div>
   </div>
 </section>
 <app-footer></app-footer>

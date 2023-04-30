@@ -32,7 +32,6 @@ export class UserService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/json',
     });
     const options = { headers: headers };
     console.log(user, options);

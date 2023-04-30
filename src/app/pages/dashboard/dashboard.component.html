@@ -1,17 +1,6 @@
-<!-- <p>dashboard works!</p>
-
-<h1>Welcome, {{ session.user.name }}!</h1>
-<h1 class="text-4xl font-bold">Olá, mundo!</h1> -->
-
-
-<!-- <app-calendar></app-calendar> -->
-<!-- <app-scheduling></app-scheduling> -->
-
-<app-sidebar></app-sidebar>
-<main class="py-10 lg:pl-72">
-  <div class="px-4 sm:px-6 lg:px-8">
-    <!-- Your content -->
-    <app-header></app-header>
+<main class="flex w-full h-full bg-indigo-50 overflow-hidden">
+  <app-sidebar></app-sidebar>
+  <div class="w-full  mx-5 items-center h-screen">
     <router-outlet></router-outlet>
-  </div>
+   </div>
 </main>

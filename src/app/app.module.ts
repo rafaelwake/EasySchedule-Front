@@ -27,6 +27,7 @@ import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.c
 import { AboutComponent } from './pages/dashboard/about/about.component';
 import { HeaderComponent } from './components/header/header.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,7 @@ import { HeaderComponent } from './components/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
-    NgbModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],
