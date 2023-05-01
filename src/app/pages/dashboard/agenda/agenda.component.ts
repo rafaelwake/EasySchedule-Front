@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { UpdateAppointmentsService } from 'src/app/services/scheduling/update-appointments.service';
 import { AppointmentModel } from 'src/app/models/appointment.model';
 import { UserService } from 'src/app/services/user/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppointmentModalComponent } from 'src/app/components/appointment-modal/appointment-modal.component';
 
 @Component({
   templateUrl: './agenda.component.html',
@@ -18,7 +20,8 @@ export class AgendaComponent implements OnInit {
     private sessionService: SessionService,
     private router: Router,
     private updateAppointmentsService: UpdateAppointmentsService,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal
   ) {
     this.session = sessionService.getSession();
   }
@@ -73,5 +76,9 @@ export class AgendaComponent implements OnInit {
     const endTime = new Date(startTime.getTime() + duration * 60 * 1000);
 
     return endTime;
+  }
+
+  newAppointment() {
+    const modalRef = this.modalService.open(AppointmentModalComponent);
   }
 }

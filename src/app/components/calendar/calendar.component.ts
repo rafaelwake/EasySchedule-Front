@@ -44,8 +44,8 @@ export class CalendarComponent {
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
+    //eventClick: this.handleEventClick.bind(this),
+    //eventsSet: this.handleEvents.bind(this),
     dayCellClassNames:
       'border border-red-300 bg-white/30 text-center font-semibold text-indigo-900 text-center',
     dayHeaderClassNames:

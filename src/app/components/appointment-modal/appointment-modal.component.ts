@@ -36,24 +36,27 @@ export class AppointmentModalComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.appointment.title = this.form.get('title')?.value;
-      this.appointment.description = this.form.get('description')?.value;
-      this.appointment.date = this.form.get('date')?.value;
-      this.appointment.duration = this.form.get('duration')?.value;
-      this.appointment.location = this.form.get('location')?.value;
-      this.appointment.invite = this.form
-        .get('invite')
-        ?.value.split(';')
-        .map((email: string) => email.trim());
+      const newAppointment: AppointmentModel = {
+        id: 0,
+        title: this.form.get('title')?.value,
+        description: this.form.get('description')?.value,
+        date: this.form.get('date')?.value,
+        duration: this.form.get('duration')?.value,
+        location: this.form.get('location')?.value,
+        invite: this.form
+          .get('invite')
+          ?.value.split(';')
+          .map((email: string) => ({ email })),
+      };
 
-      console.log('objeto final', this.appointment);
+      console.log('objeto final', newAppointment);
 
       this.createAppointmentsService
-        .createAppointment(this.appointment)
+        .createAppointment(newAppointment)
         .subscribe(
           (res) => {
             console.log(res);
-            this.saveAppointment.emit(this.appointment);
+            this.saveAppointment.emit(newAppointment);
             this.activeModal.close();
           },
           (err) => console.error(err)

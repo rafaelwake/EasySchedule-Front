@@ -9,8 +9,3 @@ export interface AppointmentModel {
   location: string;
   invite: UserModel[];
 }
-export interface AppointmentResponse {
-  success: boolean;
-  message: string | null;
-  data: AppointmentModel[];
-}
