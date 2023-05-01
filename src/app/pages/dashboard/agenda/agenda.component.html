@@ -4,11 +4,11 @@
     <div class="flex flex-1 h-full w-full ">
       <div class="flex flex-col gap-5 flex-1 w-full overflow-y-auto px-4">
         <!-- Card -->
-        <div
+        <div *ngFor="let appointment of appointments"
           class="flex w-full p-3 border opacity-75 hover:opacity-100  hover:border-none backdrop-blur-3xl cursor-pointer  rounded-lg transition ease-in-out duration-300 hover:shadow-lg">
           <div class="flex flex-col gap-2">
             <div class="flex justify-between w-full">
-              <h3 class="text-zinc-800">Título</h3>
+              <h3 class="text-zinc-800">{{ appointment.title }}</h3>
               <div class="flex gap-3">
                 <button class="bg-sky-50 text-sky-500 hover:bg-sky-100 text-sm rounded-full px-2 py-1">
                   <i class="fa-solid fa-paper-plane"></i>
@@ -24,18 +24,15 @@
                 </button>
               </div>
             </div>
-            <p class="text-zinc-400">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi possimus labore dicta, eligendi quas
-              quaerat totam reiciendis unde cum itaque corporis iusto omnis cumque aperiam? Cumque dolor quod culpa est.
-            </p>
+            <p class="text-zinc-400">{{ appointment.description }} </p>
             <div class="flex gap-2 w-full text-sm">
               <span class="rounded-full gap-1 px-2 py-1 bg-slate-50 text-slate-400">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                São João do Iracema - RS
+                {{ appointment.location }}
               </span>
               <span class="rounded-full gap-1 px-2 py-1 bg-slate-50 text-slate-400">
                 <i class="fa-solid fa-hourglass-start"></i>
-                Início 8:00h
+                Início {{ parseDate(appointment.date) | date:'HH:mm' }}h
               </span>
               <span title="+3 participantes" class="rounded-full gap-1 px-2 py-1 bg-slate-50 text-slate-400">
                 <i class="fa-solid fa-user-group"></i>
