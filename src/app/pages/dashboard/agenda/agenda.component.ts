@@ -84,6 +84,6 @@ export class AgendaComponent implements OnInit {
   }
 
   newAppointment() {
-    const modalRef = this.modalService.open(AppointmentModalComponent);
+    this.modalService.open(AppointmentModalComponent);
   }
 }

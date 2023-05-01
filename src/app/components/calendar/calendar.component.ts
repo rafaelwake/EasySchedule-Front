@@ -70,34 +70,34 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const calendarApi = selectInfo.view.calendar;
-    calendarApi.unselect(); // clear date selection
+    // const calendarApi = selectInfo.view.calendar;
+    // calendarApi.unselect(); // clear date selection
 
-    const appointment: AppointmentModel = {
-      id: 0,
-      title: '',
-      description: '',
-      date: new Date(selectInfo.startStr),
-      duration: 0,
-      location: '',
-      invite: '',
-    };
+    // const appointment: AppointmentModel = {
+    //   id: 0,
+    //   title: '',
+    //   description: '',
+    //   date: new Date(selectInfo.startStr),
+    //   duration: 0,
+    //   location: '',
+    //   invite: '',
+    // };
 
     const modalRef = this.modalService.open(AppointmentModalComponent);
-    modalRef.componentInstance.appointment = appointment;
+    // modalRef.componentInstance.appointment = appointment;
 
-    modalRef.componentInstance.saveAppointment.subscribe(
-      (newAppointment: AppointmentModel) => {
-        calendarApi.addEvent({
-          id: createEventId(),
-          title: newAppointment.title,
-          start: newAppointment.date,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay,
-          description: newAppointment.description, // Add the description property to the event
-        });
-      }
-    );
+    // modalRef.componentInstance.saveAppointment.subscribe(
+    //   (newAppointment: AppointmentModel) => {
+    //     calendarApi.addEvent({
+    //       id: createEventId(),
+    //       title: newAppointment.title,
+    //       start: newAppointment.date,
+    //       end: selectInfo.endStr,
+    //       allDay: selectInfo.allDay,
+    //       description: newAppointment.description, // Add the description property to the event
+    //     });
+    //   }
+    // );
   }
 
   handleEventClick(clickInfo: EventClickArg) {

@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppointmentModel } from 'src/app/models/appointment.model';
-import { of } from 'rxjs';
+import { environment } from 'src/app/config';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CreateAppointmentsService {
+  private baseUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) {}
 
-  createAppointment(appointment: AppointmentModel) {
-    //return this.http.post('http://localhost:3000/appointments', appointment);
+  createAppointment(
+    appointment: AppointmentModel,
+    token: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/appointment`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
 
-    // Simula uma resposta de sucesso
-    const response = {
-      status: 'success',
-      message: 'Appointment created successfully.',
-      data: appointment,
-    };
-
-    // Retorna um Observable com a resposta simulada
-    return of(response);
+    return this.http.post(url, appointment, { headers });
   }
 }
