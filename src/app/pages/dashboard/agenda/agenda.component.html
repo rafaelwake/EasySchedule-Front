@@ -18,7 +18,8 @@
                   <i class="fa-solid fa-pen-to-square"></i>
                   Editar
                 </button>
-                <button class="bg-red-50 text-red-500 text-sm hover:bg-red-100 rounded-full px-2 py-1">
+                <button (click)="openModal(appointment.id)"
+                  class="bg-red-50 text-red-500 text-sm hover:bg-red-100 rounded-full px-2 py-1">
                   <i class="fa-solid fa-trash"></i>
                   Deletar
                 </button>
