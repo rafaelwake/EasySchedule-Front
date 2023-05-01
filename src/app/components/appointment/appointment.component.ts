@@ -24,7 +24,7 @@ export class AppointmentComponent implements OnInit {
     date: new Date(),
     duration: 0,
     location: '',
-    invite: [],
+    invite: '',
   };
 
   //showDialogFlag = false;

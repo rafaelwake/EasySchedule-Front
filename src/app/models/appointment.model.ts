@@ -7,5 +7,5 @@ export interface AppointmentModel {
   date: Date;
   duration: number;
   location: string;
-  invite: UserModel[];
+  invite: string;
 }

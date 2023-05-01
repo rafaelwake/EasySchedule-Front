@@ -61,11 +61,31 @@ export class UserService {
   }
 
   findUserNameById(userId: string, token: string): Observable<string> {
+    console.log('user recebido pra check', userId);
     return this.getAllUsers(token).pipe(
-      switchMap((users: UserModel[]) => {
+      map((users: UserModel[]) => {
         const user = users.find((user) => user.id === userId);
-        return of(user ? user.name : '');
+        console.error('user retornado', user);
+        return user ? user.name : '';
+      }),
+      catchError((error) => {
+        console.error('Erro ao obter o nome do usuário:', error);
+        return throwError(error);
       })
     );
   }
+
+  // findUserNameById(userId: number, token: string): Observable<string> {
+  //   return this.http
+  //     .get<any>(`${this.baseUrl}/users/${userId}`, {
+  //       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
+  //     })
+  //     .pipe(
+  //       map((response) => response.data.name), // Adicione esta linha
+  //       catchError((error) => {
+  //         console.error('Erro ao obter o nome do usuário:', error);
+  //         return throwError(error);
+  //       })
+  //     );
+  // }
 }

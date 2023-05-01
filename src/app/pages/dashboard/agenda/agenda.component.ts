@@ -7,6 +7,7 @@ import { AppointmentModel } from 'src/app/models/appointment.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from 'src/app/components/appointment-modal/appointment-modal.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   templateUrl: './agenda.component.html',
@@ -31,31 +32,35 @@ export class AgendaComponent implements OnInit {
       .getAppointments(this.session.token)
       .subscribe(
         (response) => {
-          this.appointments = response.data.map(
-            (appointment: any): AppointmentModel => {
-              return {
-                id: appointment.id,
-                title: appointment.title,
-                description: appointment.description,
-                date: appointment.date,
-                duration: Number(appointment.duration),
-                location: appointment.location,
-                invite: appointment.user_id,
-              };
+          const appointmentData = response.data;
+          const userRequests = appointmentData.map((appointment: any) =>
+            this.userService.findUserNameById(
+              appointment.user_id,
+              this.session.token
+            )
+          );
+
+          forkJoin<string[]>(userRequests).subscribe(
+            (userNames: string[]) => {
+              this.appointments = appointmentData.map(
+                (appointment: any, index: number): AppointmentModel => {
+                  return {
+                    id: appointment.id,
+                    title: appointment.title,
+                    description: appointment.description,
+                    date: appointment.date,
+                    duration: Number(appointment.duration),
+                    location: appointment.location,
+                    invite: userNames[index],
+                  };
+                }
+              );
+              console.log('appointments', this.appointments, response);
+            },
+            (error) => {
+              console.error('Erro ao obter os nomes dos usuários:', error);
             }
           );
-          console.log('appointments', this.appointments, response);
-
-          this.userService
-            .findUserNameById(this.appointments[0].invite, this.session.token)
-            .subscribe(
-              (userName) => {
-                console.log('User name:', userName);
-              },
-              (error) => {
-                console.error('Erro ao obter o nome do usuário:', error);
-              }
-            );
         },
         (error) => {
           console.error('Erro ao obter compromissos:', error);

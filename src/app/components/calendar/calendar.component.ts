@@ -80,7 +80,7 @@ export class CalendarComponent {
       date: new Date(selectInfo.startStr),
       duration: 0,
       location: '',
-      invite: [],
+      invite: '',
     };
 
     const modalRef = this.modalService.open(AppointmentModalComponent);
