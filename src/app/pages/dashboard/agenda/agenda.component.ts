@@ -41,4 +41,11 @@ export class AgendaComponent implements OnInit {
 
     return new Date(year, month - 1, day, hour, minute);
   }
+
+  parseEndTime(dateStr: string, duration: number): Date {
+    const startTime = this.parseDate(dateStr);
+    const endTime = new Date(startTime.getTime() + duration * 60 * 1000);
+
+    return endTime;
+  }
 }
