@@ -3,6 +3,8 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from 'src/app/services/form-validation/form-validation.service';
 import { UserModel } from 'src/app/models/user.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TermsModalComponent } from 'src/app/components/terms-modal/terms-modal.component';
 
 @Component({
   selector: 'app-register',
@@ -19,12 +21,21 @@ export class RegisterComponent {
     email: '',
     password: '',
   };
+  successMessage: string;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private formValidationService: FormValidationService
-  ) {}
+    private formValidationService: FormValidationService,
+    private modalService: NgbModal
+  ) {
+    this.successMessage = '';
+  }
+
+  openTermsModal() {
+    const modalRef = this.modalService.open(TermsModalComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 
   togglePasswordVisibility(passwordFieldId: string, buttonClicked: Event) {
     const passwordField = document.getElementById(
@@ -106,20 +117,33 @@ export class RegisterComponent {
     console.log(this.user);
 
     this.userService.createUser(this.user).subscribe(
-      (result) => {
-        console.log(result);
+      (response: any) => {
+        if (response.success) {
+          this.successMessage =
+            'Conta criada com sucesso! Redirecionando para área de Entrar...';
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+        } else {
+          this.showError = true;
+          this.error = response.message;
+          setTimeout(() => {
+            this.showError = false;
+          }, 2000);
+        }
       },
       (error) => {
         console.log(error);
+        this.showError = true;
+        this.error = error;
+        setTimeout(() => {
+          this.showError = false;
+        }, 2000);
       }
     );
   }
 
   redirectToLogin() {
     this.router.navigate(['/login']);
-  }
-
-  redirectToRecovery() {
-    this.router.navigate(['/recovery']);
   }
 }

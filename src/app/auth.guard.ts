@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
       const session = this.sessionService.getSession();
       console.log('seção', session);
       if (session && session.token) {
-        return true; // usuário autenticado
+       return true; // usuário autenticado
       } else {
         this.router.navigate(['/login']); // redireciona para a página de login
         return false;
@@ -23,5 +23,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']); // redireciona para a página de login
       return false;
     }
+
+   
   }
 }
