@@ -15,6 +15,9 @@ import { AppointmentModalComponent } from '../appointment-modal/appointment-moda
 import { AppointmentModel } from 'src/app/models/appointment.model';
 import { ViewChild } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
+import { Calendar } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-calendar',
@@ -27,12 +30,11 @@ export class CalendarComponent {
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
-
+    locale: 'pt-br',
     headerToolbar: {
       left: 'title',
       center: '',
       right: 'prev,next',
-      
     },
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -44,11 +46,12 @@ export class CalendarComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-    dayCellClassNames: "border border-red-300 bg-white/30 text-center font-semibold text-indigo-900 text-center",
-    dayHeaderClassNames: " border-b border-indigo-500 text-indigo-500 text-semibold text-sm border-none",
-    viewClassNames: "backdrop-blur-lg bg-indigo-50",
-    allDayClassNames: "bg-red-300"
-    
+    dayCellClassNames:
+      'border border-red-300 bg-white/30 text-center font-semibold text-indigo-900 text-center',
+    dayHeaderClassNames:
+      ' border-b border-indigo-500 text-indigo-500 text-semibold text-sm border-none',
+    viewClassNames: 'backdrop-blur-lg bg-indigo-50',
+    allDayClassNames: 'bg-red-300',
   };
   currentEvents: EventApi[] = [];
 
