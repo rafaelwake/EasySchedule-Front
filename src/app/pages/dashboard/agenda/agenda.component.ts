@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionModel } from 'src/app/models/user.model';
+import { SessionModel, UserModel } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/user/session.service';
 import { Router } from '@angular/router';
 import { UpdateAppointmentsService } from 'src/app/services/scheduling/update-appointments.service';
+import { AppointmentModel } from 'src/app/models/appointment.model';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   templateUrl: './agenda.component.html',
@@ -15,7 +17,8 @@ export class AgendaComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    private updateAppointmentsService: UpdateAppointmentsService
+    private updateAppointmentsService: UpdateAppointmentsService,
+    private userService: UserService
   ) {
     this.session = sessionService.getSession();
   }
@@ -25,8 +28,31 @@ export class AgendaComponent implements OnInit {
       .getAppointments(this.session.token)
       .subscribe(
         (response) => {
-          this.appointments = response.data;
-          console.log('appointments', this.appointments);
+          this.appointments = response.data.map(
+            (appointment: any): AppointmentModel => {
+              return {
+                id: appointment.id,
+                title: appointment.title,
+                description: appointment.description,
+                date: appointment.date,
+                duration: Number(appointment.duration),
+                location: appointment.location,
+                invite: appointment.user_id,
+              };
+            }
+          );
+          console.log('appointments', this.appointments, response);
+
+          this.userService
+            .findUserNameById(this.appointments[0].invite, this.session.token)
+            .subscribe(
+              (userName) => {
+                console.log('User name:', userName);
+              },
+              (error) => {
+                console.error('Erro ao obter o nome do usuário:', error);
+              }
+            );
         },
         (error) => {
           console.error('Erro ao obter compromissos:', error);

@@ -6,6 +6,8 @@ import { environment } from 'src/app/config';
 import { map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +56,15 @@ export class UserService {
       catchError((error: HttpErrorResponse) => {
         console.error('Erro ao obter usuários:', error);
         return throwError(error);
+      })
+    );
+  }
+
+  findUserNameById(userId: string, token: string): Observable<string> {
+    return this.getAllUsers(token).pipe(
+      switchMap((users: UserModel[]) => {
+        const user = users.find((user) => user.id === userId);
+        return of(user ? user.name : '');
       })
     );
   }
