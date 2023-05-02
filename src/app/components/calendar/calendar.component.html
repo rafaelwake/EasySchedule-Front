@@ -1,8 +1,8 @@
-  <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' class="w-full ">
-    <ng-template #eventContent let-arg class="w-full">
-      <div class="fc-content">
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
-      </div>
-    </ng-template>
-  </full-calendar>
+<full-calendar *ngIf='calendarVisible' [options]='calendarOptions' class="w-full ">
+  <ng-template #eventContent let-arg class="w-full">
+    <div class="fc-content">
+      <b>{{ arg.timeText }}</b>
+      <i class="p-4">{{ arg.event.title }}</i>
+    </div>
+  </ng-template>
+</full-calendar>

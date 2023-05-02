@@ -28,6 +28,7 @@ import { QuickGuideComponent } from './pages/dashboard/quick-guide/quick-guide.c
 import { AboutComponent } from './pages/dashboard/about/about.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TermsModalComponent } from './components/terms-modal/terms-modal.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { TermsModalComponent } from './components/terms-modal/terms-modal.compon
     FullCalendarModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

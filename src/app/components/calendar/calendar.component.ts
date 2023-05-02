@@ -15,47 +15,62 @@ import { AppointmentModalComponent } from '../appointment-modal/appointment-moda
 import { AppointmentModel } from 'src/app/models/appointment.model';
 import { ViewChild } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
+import { Calendar } from '@fullcalendar/core';
+import { Input } from '@angular/core';
+import { EventInput } from '@fullcalendar/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnChanges {
   @ViewChild('sidenav') sidenav!: NgbCollapse;
+  @Input() calendarEvents: EventInput[] = [];
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
-
+    locale: 'pt-br',
     headerToolbar: {
       left: 'title',
       center: '',
       right: 'prev,next',
-      
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    events: this.calendarEvents,
     weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
-    dayCellClassNames: "border border-red-300 bg-white/30 text-center font-semibold text-indigo-900 text-center",
-    dayHeaderClassNames: " border-b border-indigo-500 text-indigo-500 text-semibold text-sm border-none",
-    viewClassNames: "backdrop-blur-lg bg-indigo-50",
-    allDayClassNames: "bg-red-300"
-    
+    //eventClick: this.handleEventClick.bind(this),
+    //eventsSet: this.handleEvents.bind(this),
+    dayCellClassNames:
+      'border border-red-300 bg-white/30 text-center font-semibold text-indigo-900 text-center',
+    dayHeaderClassNames:
+      ' border-b border-indigo-500 text-indigo-500 text-semibold text-sm border-none',
+    viewClassNames: 'backdrop-blur-lg bg-indigo-50',
+    allDayClassNames: 'bg-red-300',
   };
   currentEvents: EventApi[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal
-  ) {}
+  ) {
+    console.log('eventos no calendar', this.calendarEvents);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['calendarEvents'] && changes['calendarEvents'].currentValue) {
+      this.calendarOptions.events = changes['calendarEvents'].currentValue;
+    }
+  }
 
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
@@ -67,34 +82,34 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const calendarApi = selectInfo.view.calendar;
-    calendarApi.unselect(); // clear date selection
+    // const calendarApi = selectInfo.view.calendar;
+    // calendarApi.unselect(); // clear date selection
 
-    const appointment: AppointmentModel = {
-      id: 0,
-      title: '',
-      description: '',
-      date: new Date(selectInfo.startStr),
-      duration: 0,
-      location: '',
-      invite: [],
-    };
+    // const appointment: AppointmentModel = {
+    //   id: 0,
+    //   title: '',
+    //   description: '',
+    //   date: new Date(selectInfo.startStr),
+    //   duration: 0,
+    //   location: '',
+    //   invite: '',
+    // };
 
     const modalRef = this.modalService.open(AppointmentModalComponent);
-    modalRef.componentInstance.appointment = appointment;
+    // modalRef.componentInstance.appointment = appointment;
 
-    modalRef.componentInstance.saveAppointment.subscribe(
-      (newAppointment: AppointmentModel) => {
-        calendarApi.addEvent({
-          id: createEventId(),
-          title: newAppointment.title,
-          start: newAppointment.date,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay,
-          description: newAppointment.description, // Add the description property to the event
-        });
-      }
-    );
+    // modalRef.componentInstance.saveAppointment.subscribe(
+    //   (newAppointment: AppointmentModel) => {
+    //     calendarApi.addEvent({
+    //       id: createEventId(),
+    //       title: newAppointment.title,
+    //       start: newAppointment.date,
+    //       end: selectInfo.endStr,
+    //       allDay: selectInfo.allDay,
+    //       description: newAppointment.description, // Add the description property to the event
+    //     });
+    //   }
+    // );
   }
 
   handleEventClick(clickInfo: EventClickArg) {

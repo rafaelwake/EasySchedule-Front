@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppointmentModel } from 'src/app/models/appointment.model';
 import { environment } from 'src/app/config';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CreateAppointmentsService {
+export class DeleteAppointmentService {
   private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  createAppointment(
-    appointment: AppointmentModel,
-    token: string
-  ): Observable<any> {
-    const url = `${this.baseUrl}/appointment`;
+  deleteAppointment(id: number, token: string): Observable<any> {
+    const url = `${this.baseUrl}/appointment/${id}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.post(url, appointment, { headers });
+    return this.http.delete(url, { headers });
   }
 }

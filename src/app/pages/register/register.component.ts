@@ -123,7 +123,7 @@ export class RegisterComponent {
             'Conta criada com sucesso! Redirecionando para área de Entrar...';
           setTimeout(() => {
             this.router.navigate(['/login']);
-          }, 3000);
+          }, 2200);
         } else {
           this.showError = true;
           this.error = response.message;

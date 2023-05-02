@@ -16,9 +16,7 @@ export class SessionService {
   constructor(private router: Router) {}
 
   getSession(): SessionModel {
-    console.log('inico', this.session);
     if (this.session.token !== '') {
-      console.log('primeiro', this.session);
       return this.session;
     } else {
       const session = this.getSessionFromSessionStorage();

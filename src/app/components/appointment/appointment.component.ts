@@ -24,7 +24,7 @@ export class AppointmentComponent implements OnInit {
     date: new Date(),
     duration: 0,
     location: '',
-    invite: [],
+    invite: '',
   };
 
   //showDialogFlag = false;
@@ -36,26 +36,26 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      this.createAppointmentsService
-        .createAppointment(this.appointment)
-        .subscribe(
-          (res) => {
-            console.log(res);
-            const newEvent: EventInput = {
-              id: createEventId(),
-              title: this.appointment.title,
-              start: this.appointment.duration,
-              end: this.appointment.duration,
-              description: this.appointment.description,
-              backgroundColor: '#b3b3b3',
-            };
-            this.appointmentCreated.emit(newEvent);
-            this.showDialogFlag = false;
-          },
-          (err) => console.error(err)
-        );
-    }
+    // if (form.valid) {
+    //   this.createAppointmentsService
+    //     .createAppointment(this.appointment)
+    //     .subscribe(
+    //       (res) => {
+    //         console.log(res);
+    //         const newEvent: EventInput = {
+    //           id: createEventId(),
+    //           title: this.appointment.title,
+    //           start: this.appointment.duration,
+    //           end: this.appointment.duration,
+    //           description: this.appointment.description,
+    //           backgroundColor: '#b3b3b3',
+    //         };
+    //         this.appointmentCreated.emit(newEvent);
+    //         this.showDialogFlag = false;
+    //       },
+    //       (err) => console.error(err)
+    //     );
+    // }
   }
 
   showDialog(startDate: Date): void {
@@ -68,7 +68,7 @@ export class AppointmentComponent implements OnInit {
     // Quando o compromisso for criado com sucesso
     if (this.callback) {
       const newEvent: EventInput = {
-        id: this.appointment.id.toString(),
+        // id: this.appointment.id.toString(),
         title: this.appointment.title,
         start: this.appointment.date,
         allDay: true,
