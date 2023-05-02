@@ -75,17 +75,12 @@ export class UserService {
     );
   }
 
-  // findUserNameById(userId: number, token: string): Observable<string> {
-  //   return this.http
-  //     .get<any>(`${this.baseUrl}/users/${userId}`, {
-  //       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
-  //     })
-  //     .pipe(
-  //       map((response) => response.data.name), // Adicione esta linha
-  //       catchError((error) => {
-  //         console.error('Erro ao obter o nome do usuário:', error);
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
+  updateAccount(token: string, user: UserModel) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    const options = { headers: headers };
+    return this.http.put(`${this.baseUrl}/user/`, user, options);
+  }
 }
