@@ -18,14 +18,18 @@ import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
 import { Calendar } from '@fullcalendar/core';
+import { Input } from '@angular/core';
+import { EventInput } from '@fullcalendar/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnChanges {
   @ViewChild('sidenav') sidenav!: NgbCollapse;
+  @Input() calendarEvents: EventInput[] = [];
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -37,7 +41,7 @@ export class CalendarComponent {
       right: 'prev,next',
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    events: this.calendarEvents,
     weekends: true,
     editable: true,
     selectable: true,
@@ -58,7 +62,15 @@ export class CalendarComponent {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal
-  ) {}
+  ) {
+    console.log('eventos no calendar', this.calendarEvents);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['calendarEvents'] && changes['calendarEvents'].currentValue) {
+      this.calendarOptions.events = changes['calendarEvents'].currentValue;
+    }
+  }
 
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;

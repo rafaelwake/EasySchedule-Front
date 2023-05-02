@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SessionModel, UserModel } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/user/session.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,9 @@ import { forkJoin } from 'rxjs';
 import { DeleteAppointmentService } from 'src/app/services/scheduling/delete-appointment.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './ngbd-modal-content';
+import { EventInput } from '@fullcalendar/core';
+
+const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
 
 @Component({
   templateUrl: './agenda.component.html',
@@ -19,6 +22,7 @@ export class AgendaComponent implements OnInit {
   session: SessionModel;
   appointments: any[] = [];
   modalRef!: NgbModalRef;
+  @Output() eventArray: EventInput[] = [];
 
   constructor(
     private sessionService: SessionService,
@@ -60,6 +64,9 @@ export class AgendaComponent implements OnInit {
                 }
               );
               console.log('appointments', this.appointments, response);
+              this.eventArray = this.convertAppointmentsToEvents(
+                this.appointments
+              );
             },
             (error) => {
               console.error('Erro ao obter os nomes dos usuários:', error);
@@ -153,5 +160,17 @@ export class AgendaComponent implements OnInit {
           console.error('Erro ao efetuar a exclusão:', error);
         }
       );
+  }
+
+  convertAppointmentsToEvents(appointments: AppointmentModel[]): EventInput[] {
+    console.error('teste', appointments);
+
+    return appointments.map((appointment) => ({
+      id: appointment.id?.toString() || '',
+      title: appointment.title,
+      start: appointment.date,
+      end: appointment.date,
+      description: appointment.description,
+    }));
   }
 }
