@@ -101,7 +101,7 @@ export class AppointmentModalComponent implements OnInit {
               setTimeout(() => {
                 this.activeModal.close();
                 this.appointmentEventService.onAppointmentCreated.emit();
-              }, 1000);
+              }, 700);
             },
             (err) => {
               console.error(err);

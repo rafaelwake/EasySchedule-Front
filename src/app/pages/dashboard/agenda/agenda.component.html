@@ -1,8 +1,15 @@
 <div class="flex flex-col lg:pt-40 w-full h-full py-4">
   <div class="shadow-lg flex flex-col rounded-lg py-3 px-4 h-full backdrop-blur-3xl bg-white/80">
     <h1 class="text-xl text-slate-500 mb-3 font-semibold">Agendamentos</h1>
+    <div class="flex justify-left mb-2">
+      <button (click)="newAppointment()"
+        class="py-1 px-3 flex items-center bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition ease-in-out duration-300 gap-1 rounded-full">
+        <i class="fa-solid fa-calendar-plus"></i>
+        Criar evento
+      </button>
+    </div>
     <div class="flex flex-1 w-full overflow-auto">
-      <div class="flex flex-col gap-5 flex-1 w-full px-4">
+      <div class="flex flex-col gap-5 flex-1 w-full px-2">
         <!-- Card -->
         <div *ngFor="let appointment of appointments"
           class="flex w-full p-3 border opacity-75 hover:opacity-100  hover:border-none backdrop-blur-3xl cursor-pointer  rounded-lg transition ease-in-out duration-300 hover:shadow-lg">
@@ -51,7 +58,6 @@
       </div>
       <div class="flex flex-col pb-2 gap-2 w-full max-w-md mr-4">
         <app-calendar [calendarEvents]="eventArray" class="w-full"></app-calendar>
-
         <div class="flex justify-center">
           <button (click)="newAppointment()"
             class="py-1 px-3 flex items-center bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition ease-in-out duration-300 gap-1 rounded-full">
