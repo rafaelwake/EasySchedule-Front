@@ -11,6 +11,7 @@ import { DeleteAppointmentService } from 'src/app/services/scheduling/delete-app
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './ngbd-modal-content';
 import { EventInput } from '@fullcalendar/core';
+import { AppointmentEventService } from 'src/app/services/scheduling/appointment-event.service';
 
 const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
 
@@ -30,12 +31,19 @@ export class AgendaComponent implements OnInit {
     private updateAppointmentsService: UpdateAppointmentsService,
     private userService: UserService,
     private modalService: NgbModal,
-    private deleteAppointmentService: DeleteAppointmentService
+    private deleteAppointmentService: DeleteAppointmentService,
+    private appointmentEventService: AppointmentEventService
   ) {
     this.session = sessionService.getSession();
   }
 
   ngOnInit() {
+    this.loadAppointments();
+    this.appointmentEventService.onAppointmentCreated.subscribe(() => {
+      this.loadAppointments();
+    });
+  }
+  loadAppointments() {
     this.updateAppointmentsService
       .getAppointments(this.session.token)
       .subscribe(

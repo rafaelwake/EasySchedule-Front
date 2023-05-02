@@ -12,6 +12,9 @@ import {
 import { SessionModel } from 'src/app/models/user.model';
 import { SessionService } from 'src/app/services/user/session.service';
 import { DatePipe } from '@angular/common';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ApplicationRef } from '@angular/core';
+import { AppointmentEventService } from 'src/app/services/scheduling/appointment-event.service';
 
 @Component({
   selector: 'app-appointment-modal',
@@ -23,15 +26,22 @@ export class AppointmentModalComponent implements OnInit {
   @Output() saveAppointment = new EventEmitter<AppointmentModel>();
   form!: FormGroup;
   session: SessionModel;
+  showError: boolean = false;
+  successMessage: string;
+  public error = '';
 
   constructor(
     private sessionService: SessionService,
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private createAppointmentsService: CreateAppointmentsService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private appRef: ApplicationRef,
+    private router: Router,
+    private appointmentEventService: AppointmentEventService
   ) {
     this.session = sessionService.getSession();
+    this.successMessage = '';
   }
 
   ngOnInit(): void {
@@ -50,10 +60,9 @@ export class AppointmentModalComponent implements OnInit {
       date: [this.appointment.date, Validators.required],
       duration: [
         this.appointment.duration,
-        [Validators.required, Validators.min(1)],
+        [Validators.required, Validators.min(0)],
       ],
       location: [this.appointment.location, Validators.required],
-      invite: [this.appointment.invite, [Validators.email]],
     });
   }
 
@@ -88,11 +97,30 @@ export class AppointmentModalComponent implements OnInit {
           .subscribe(
             (res) => {
               console.log(res);
-              this.activeModal.close();
+              this.successMessage = 'Compromisso criado com sucesso!';
+              setTimeout(() => {
+                this.activeModal.close();
+                this.appointmentEventService.onAppointmentCreated.emit();
+              }, 1000);
             },
-            (err) => console.error(err)
+            (err) => {
+              console.error(err);
+              this.showError = true;
+              this.error = err;
+              setTimeout(() => {
+                this.showError = false;
+              }, 3000);
+              return;
+            }
           );
       }
+    } else {
+      this.showError = true;
+      this.error = 'Preencha todos os campos em "*"';
+      setTimeout(() => {
+        this.showError = false;
+      }, 3000);
+      return;
     }
   }
 }

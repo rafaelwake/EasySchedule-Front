@@ -41,8 +41,15 @@
             class=" rounded-full py-1 px-2 focus:shadow-sm w-full transition ease-in-out duration-150 outline-none border-2 border-gray-100 focus:border-gray-300" />
         </div>
       </div>
+      <div class="my-1">
+        <!--Alert-->
+        <div *ngIf="showError" class="alert alert-danger text-sm">{{ error }}</div>
+        <div *ngIf="successMessage" class="alert alert-success">
+          {{ successMessage }}
+        </div>
+      </div>
 
-      <div class="flex w-full justify-end gap-2">
+      <div class="flex w-full justify-center gap-2">
         <button class="bg-red-100 py-1 px-3 text-red-500 rounded-full" type="button"
           (click)="activeModal.dismiss('Cross click')">
           Cancelar
