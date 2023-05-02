@@ -1,5 +1,7 @@
 # EasyScheduling
 
+Official documentation: https://spangled-hugger-8b8.notion.site/Easy-Scheduling-a8e6c0be6cf8477ea804af43b1b4aa44
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
 ## Development server
