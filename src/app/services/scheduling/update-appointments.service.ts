@@ -19,11 +19,10 @@ export class UpdateAppointmentsService {
   }
 
   updateAppointment(
-    id: number,
     appointment: AppointmentModel,
     token: string
   ): Observable<any> {
-    const url = `${this.baseUrl}/appointment/${id}`;
+    const url = `${this.baseUrl}/appointment/`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { ApplicationRef } from '@angular/core';
 import { AppointmentEventService } from 'src/app/services/scheduling/appointment-event.service';
+import { UpdateAppointmentsService } from 'src/app/services/scheduling/update-appointments.service';
 
 @Component({
   selector: 'app-appointment-modal',
@@ -23,6 +24,7 @@ import { AppointmentEventService } from 'src/app/services/scheduling/appointment
 })
 export class AppointmentModalComponent implements OnInit {
   @Input() appointment!: AppointmentModel;
+  @Input() isEditing: boolean = false;
   @Output() saveAppointment = new EventEmitter<AppointmentModel>();
   form!: FormGroup;
   session: SessionModel;
@@ -38,7 +40,8 @@ export class AppointmentModalComponent implements OnInit {
     private datePipe: DatePipe,
     private appRef: ApplicationRef,
     private router: Router,
-    private appointmentEventService: AppointmentEventService
+    private appointmentEventService: AppointmentEventService,
+    private updateAppointmentService: UpdateAppointmentsService
   ) {
     this.session = sessionService.getSession();
     this.successMessage = '';
@@ -64,6 +67,7 @@ export class AppointmentModalComponent implements OnInit {
       ],
       location: [this.appointment.location, Validators.required],
     });
+    console.log('editando?', this.isEditing);
   }
 
   onSubmit() {
@@ -74,14 +78,19 @@ export class AppointmentModalComponent implements OnInit {
       console.log('tes', this.form.valid);
       console.log(this.form.controls);
 
-      if (this.form.valid) {
-        let dateValue = this.form.get('date')?.value.replace('T', ' ');
-        dateValue += ':00';
+      let dateValue = this.form.get('date')?.value.replace('T', ' ');
+      dateValue += ':00';
 
-        const durationValue = this.form.get('duration')?.value;
-        const [hours, minutes] = durationValue.split(':').map(Number);
-        const totalMinutes = hours * 60 + minutes;
-
+      const durationValue = this.form.get('duration')?.value;
+      console.log(durationValue);
+      if (durationValue) {
+        let totalMinutes;
+        if (this.isEditing) {
+          totalMinutes = durationValue;
+        } else {
+          const [hours, minutes] = durationValue.split(':').map(Number);
+          totalMinutes = hours * 60 + minutes;
+        }
         const newAppointment: AppointmentModel = {
           title: this.form.get('title')?.value,
           description: this.form.get('description')?.value,
@@ -90,6 +99,10 @@ export class AppointmentModalComponent implements OnInit {
           location: this.form.get('location')?.value,
         };
 
+        if (this.isEditing) {
+          this.updateAppointment(newAppointment);
+          return;
+        }
         console.log('objeto final', newAppointment);
 
         this.createAppointmentsService
@@ -113,6 +126,13 @@ export class AppointmentModalComponent implements OnInit {
               return;
             }
           );
+      } else {
+        this.showError = true;
+        this.error = 'Preencha todos os campos em "*"';
+        setTimeout(() => {
+          this.showError = false;
+        }, 3000);
+        return;
       }
     } else {
       this.showError = true;
@@ -122,5 +142,33 @@ export class AppointmentModalComponent implements OnInit {
       }, 3000);
       return;
     }
+  }
+
+  updateAppointment(appointment: AppointmentModel) {
+    console.log('Chegou aq', appointment);
+
+    appointment.id = this.appointment.id;
+
+    this.updateAppointmentService
+      .updateAppointment(appointment, this.session.token)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          this.successMessage = 'Compromisso criado com sucesso!';
+          setTimeout(() => {
+            this.activeModal.close();
+            this.appointmentEventService.onAppointmentCreated.emit();
+          }, 700);
+        },
+        (err: any) => {
+          console.error(err);
+          this.showError = true;
+          this.error = err;
+          setTimeout(() => {
+            this.showError = false;
+          }, 3000);
+          return;
+        }
+      );
   }
 }

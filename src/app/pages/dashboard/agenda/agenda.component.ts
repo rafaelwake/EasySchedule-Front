@@ -13,8 +13,6 @@ import { NgbdModalContent } from './ngbd-modal-content';
 import { EventInput } from '@fullcalendar/core';
 import { AppointmentEventService } from 'src/app/services/scheduling/appointment-event.service';
 
-const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
-
 @Component({
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.css'],
@@ -104,6 +102,12 @@ export class AgendaComponent implements OnInit {
 
   newAppointment() {
     this.modalService.open(AppointmentModalComponent);
+  }
+
+  editAppointment(appointment: AppointmentModel) {
+    const modalRef = this.modalService.open(AppointmentModalComponent);
+    modalRef.componentInstance.appointment = appointment;
+    modalRef.componentInstance.isEditing = true;
   }
 
   openModal(id: number) {
